@@ -1,5 +1,5 @@
-import { z } from "zod";
-
+import { z } from "../lib/zod";
+import { z as baseZ } from "zod";
 export const CustomerStatus = z.enum(["active", "inactive", "frozen"]);
 export const Province = z.enum([
   "AB",
@@ -36,7 +36,7 @@ export const CustomerProfile = z.object({
   address: Address,
 });
 
-export type CustomerProfile = z.infer<typeof CustomerProfile>;
+export type CustomerProfile = baseZ.infer<typeof CustomerProfile>;
 
 export const CustomerSearchRequest = z.object({
   query: z.string().min(1).optional(), // name/email substring
