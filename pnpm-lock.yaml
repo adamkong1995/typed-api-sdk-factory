@@ -16,6 +16,9 @@ importers:
       hono:
         specifier: ^4.11.7
         version: 4.11.7
+      swagger-ui-dist:
+        specifier: ^5.31.0
+        version: 5.31.0
       zod:
         specifier: ^4.3.6
         version: 4.3.6
@@ -202,6 +205,9 @@ packages:
     peerDependencies:
       hono: ^4
 
+  '@scarf/scarf@1.4.0':
+    resolution: {integrity: sha512-xxeapPiUXdZAE3che6f3xogoJPeZgig6omHEy1rIY5WVsB3H2BHNnZH+gHG6x91SCWyQCzWGsuL2Hh3ClO5/qQ==}
+
   '@types/node@25.2.0':
     resolution: {integrity: sha512-DZ8VwRFUNzuqJ5khrvwMXHmvPe+zGayJhr2CDNiKB1WBE1ST8Djl00D0IC4vvNmHMdj6DlbYRIaFE7WHjlDl5w==}
 
@@ -227,6 +233,9 @@ packages:
 
   resolve-pkg-maps@1.0.0:
     resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
+
+  swagger-ui-dist@5.31.0:
+    resolution: {integrity: sha512-zSUTIck02fSga6rc0RZP3b7J7wgHXwLea8ZjgLA3Vgnb8QeOl3Wou2/j5QkzSGeoz6HusP/coYuJl33aQxQZpg==}
 
   tsx@4.21.0:
     resolution: {integrity: sha512-5C1sg4USs1lfG0GFb2RLXsdpXqBSEhAaA/0kPL01wxzpMqLILNxIxIOKiILz+cdg/pLnOUxFYOR5yhHU666wbw==}
@@ -338,6 +347,8 @@ snapshots:
     dependencies:
       hono: 4.11.7
 
+  '@scarf/scarf@1.4.0': {}
+
   '@types/node@25.2.0':
     dependencies:
       undici-types: 7.16.0
@@ -385,6 +396,10 @@ snapshots:
       yaml: 2.8.2
 
   resolve-pkg-maps@1.0.0: {}
+
+  swagger-ui-dist@5.31.0:
+    dependencies:
+      '@scarf/scarf': 1.4.0
 
   tsx@4.21.0:
     dependencies:
