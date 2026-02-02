@@ -6,8 +6,70 @@ import {
   CustomerSearchRequest,
   CustomerSearchResponse,
 } from "../schemas/customer";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import swaggerUiDist from "swagger-ui-dist";
+import { buildOpenApiDoc } from "./openapi-doc";
 
 const app = new Hono();
+
+// Serve OpenAPI spec
+
+app.get("/openapi.json", (c) => {
+  // Always fresh + matches schemas
+  const doc = buildOpenApiDoc();
+  return c.json(doc);
+});
+
+app.get("/docs", (c) => {
+  const html = `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>API A Docs</title>
+    <link rel="stylesheet" href="/docs/swagger-ui.css" />
+  </head>
+  <body>
+    <div id="swagger-ui"></div>
+
+    <script src="/docs/swagger-ui-bundle.js"></script>
+    <script src="/docs/swagger-ui-standalone-preset.js"></script>
+    <script>
+      window.ui = SwaggerUIBundle({
+        url: '/openapi.json',
+        dom_id: '#swagger-ui',
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        layout: "StandaloneLayout"
+      });
+    </script>
+  </body>
+</html>`;
+  return c.html(html);
+});
+
+// Serve swagger-ui-dist static assets under /docs/*
+app.get("/docs/*", (c) => {
+  const assetPath = c.req.path.replace(/^\/docs\//, "");
+  const distPath = swaggerUiDist.getAbsoluteFSPath();
+  const filePath = join(distPath, assetPath);
+
+  try {
+    const content = readFileSync(filePath);
+    // Minimal content-type handling
+    if (filePath.endsWith(".css")) c.header("content-type", "text/css");
+    else if (filePath.endsWith(".js"))
+      c.header("content-type", "application/javascript");
+    else if (filePath.endsWith(".png")) c.header("content-type", "image/png");
+    else if (filePath.endsWith(".map"))
+      c.header("content-type", "application/json");
+    return c.body(content);
+  } catch {
+    return c.text("Not found", 404);
+  }
+});
 
 /**
  * GET /health

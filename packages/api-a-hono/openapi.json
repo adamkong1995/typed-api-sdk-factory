@@ -18,22 +18,14 @@
         "properties": {
           "ok": {
             "type": "boolean",
-            "enum": [
-              true
-            ]
+            "enum": [true]
           }
         },
-        "required": [
-          "ok"
-        ]
+        "required": ["ok"]
       },
       "CustomerStatus": {
         "type": "string",
-        "enum": [
-          "active",
-          "inactive",
-          "frozen"
-        ]
+        "enum": ["active", "inactive", "frozen"]
       },
       "Province": {
         "type": "string",
@@ -91,18 +83,10 @@
           },
           "country": {
             "type": "string",
-            "enum": [
-              "CA"
-            ]
+            "enum": ["CA"]
           }
         },
-        "required": [
-          "line1",
-          "city",
-          "province",
-          "postalCode",
-          "country"
-        ]
+        "required": ["line1", "city", "province", "postalCode", "country"]
       },
       "CustomerProfile": {
         "type": "object",
@@ -125,11 +109,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "active",
-              "inactive",
-              "frozen"
-            ]
+            "enum": ["active", "inactive", "frozen"]
           },
           "createdAt": {
             "type": "string",
@@ -173,18 +153,10 @@
               },
               "country": {
                 "type": "string",
-                "enum": [
-                  "CA"
-                ]
+                "enum": ["CA"]
               }
             },
-            "required": [
-              "line1",
-              "city",
-              "province",
-              "postalCode",
-              "country"
-            ]
+            "required": ["line1", "city", "province", "postalCode", "country"]
           }
         },
         "required": [
@@ -205,11 +177,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "active",
-              "inactive",
-              "frozen"
-            ]
+            "enum": ["active", "inactive", "frozen"]
           },
           "province": {
             "type": "string",
@@ -263,11 +231,7 @@
                 },
                 "status": {
                   "type": "string",
-                  "enum": [
-                    "active",
-                    "inactive",
-                    "frozen"
-                  ]
+                  "enum": ["active", "inactive", "frozen"]
                 },
                 "createdAt": {
                   "type": "string",
@@ -311,9 +275,7 @@
                     },
                     "country": {
                       "type": "string",
-                      "enum": [
-                        "CA"
-                      ]
+                      "enum": ["CA"]
                     }
                   },
                   "required": [
@@ -336,9 +298,7 @@
             }
           }
         },
-        "required": [
-          "results"
-        ]
+        "required": ["results"]
       }
     },
     "parameters": {}
@@ -357,14 +317,10 @@
                   "properties": {
                     "ok": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     }
                   },
-                  "required": [
-                    "ok"
-                  ]
+                  "required": ["ok"]
                 }
               }
             }
@@ -412,11 +368,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "enum": [
-                        "active",
-                        "inactive",
-                        "frozen"
-                      ]
+                      "enum": ["active", "inactive", "frozen"]
                     },
                     "createdAt": {
                       "type": "string",
@@ -460,9 +412,7 @@
                         },
                         "country": {
                           "type": "string",
-                          "enum": [
-                            "CA"
-                          ]
+                          "enum": ["CA"]
                         }
                       },
                       "required": [
@@ -497,9 +447,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -522,11 +470,7 @@
                   },
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "active",
-                      "inactive",
-                      "frozen"
-                    ]
+                    "enum": ["active", "inactive", "frozen"]
                   },
                   "province": {
                     "type": "string",
@@ -588,11 +532,7 @@
                           },
                           "status": {
                             "type": "string",
-                            "enum": [
-                              "active",
-                              "inactive",
-                              "frozen"
-                            ]
+                            "enum": ["active", "inactive", "frozen"]
                           },
                           "createdAt": {
                             "type": "string",
@@ -636,9 +576,7 @@
                               },
                               "country": {
                                 "type": "string",
-                                "enum": [
-                                  "CA"
-                                ]
+                                "enum": ["CA"]
                               }
                             },
                             "required": [
@@ -661,9 +599,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "results"
-                  ]
+                  "required": ["results"]
                 }
               }
             }
