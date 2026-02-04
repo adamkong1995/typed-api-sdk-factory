@@ -1,7 +1,6 @@
 {
-  "name": "@demo/sdk-a",
+  "name": "@adamkong1995/sdk-a",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,5 +28,8 @@
     "@types/node": "^25.2.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

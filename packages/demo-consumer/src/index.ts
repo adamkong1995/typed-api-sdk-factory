@@ -3,14 +3,14 @@ import {
   getHealth as getHealthA,
   getCustomersByCustomerId,
   postCustomersSearch,
-} from "@demo/sdk-a";
+} from "@adamkong1995/sdk-a";
 
 import {
   createApiBClient,
   getHealth as getHealthB,
   getCustomersByCustomerIdChequingAccounts,
   getChequingAccountsByAccountIdTransactions,
-} from "@demo/sdk-b";
+} from "@adamkong1995/sdk-b";
 
 import { waitForHealth } from "./utils.js";
 

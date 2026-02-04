@@ -16,7 +16,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@demo/sdk-a": "workspace:*",
-    "@demo/sdk-b": "workspace:*"
+    "@adamkong1995/sdk-a": "workspace:*",
+    "@adamkong1995/sdk-b": "workspace:*"
   }
 }
