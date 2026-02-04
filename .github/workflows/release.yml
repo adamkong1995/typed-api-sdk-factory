@@ -26,14 +26,16 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm -r build
-        # (APIs might not have build; that's ok. If it fails, we can filter to sdk-* only.)
+      - name: Generate OpenAPI + SDK (ensures publish artifacts are current)
+        run: pnpm generate:openapi && pnpm generate:sdk
+
+      - name: Build SDKs
+        run: pnpm build
 
       - name: Create Release PR or Publish
         uses: changesets/action@v1
