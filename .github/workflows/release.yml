@@ -1,21 +1,24 @@
-name: Release (GitHub Packages)
+name: Publish SDK (GitHub Packages)
 
 on:
   push:
-    branches: [main]
-
-permissions:
-  contents: write
-  pull-requests: write
-  packages: write
+    tags:
+      - "sdk-a-v*.*.*"
+      - "sdk-b-v*.*.*"
+  workflow_dispatch: {}
 
 jobs:
-  release:
+  build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # IMPORTANT: install pnpm before setup-node tries to cache pnpm
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -28,19 +31,62 @@ jobs:
           cache: pnpm
           registry-url: https://npm.pkg.github.com
 
-      - name: Install
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "@adamkong1995:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+
+      - name: Determine package from tag
+        id: pkg
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="${GITHUB_REF_NAME}"
+
+          if [[ "$TAG" == sdk-a-v* ]]; then
+            echo "dir=packages/sdk-a" >> $GITHUB_OUTPUT
+            echo "version=${TAG#sdk-a-v}" >> $GITHUB_OUTPUT
+          elif [[ "$TAG" == sdk-b-v* ]]; then
+            echo "dir=packages/sdk-b" >> $GITHUB_OUTPUT
+            echo "version=${TAG#sdk-b-v}" >> $GITHUB_OUTPUT
+          else
+            echo "Unsupported tag: $TAG" >&2
+            exit 1
+          fi
+
+      - name: Install (workspace)
         run: pnpm install --frozen-lockfile
 
-      - name: Generate OpenAPI + SDK (ensures publish artifacts are current)
+      # Ensure specs + generated clients are up to date at publish time
+      - name: Generate OpenAPI + SDK
         run: pnpm generate:openapi && pnpm generate:sdk
 
-      - name: Build SDKs
-        run: pnpm build
+      - name: Build target SDK
+        run: pnpm --filter "./${{ steps.pkg.outputs.dir }}" build
 
-      - name: Create Release PR or Publish
-        uses: changesets/action@v1
-        with:
-          publish: pnpm release
+      - name: Align version from tag
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        run: |
+          pnpm version --no-git-tag-version ${{ steps.pkg.outputs.version }}
+
+      # Optional guard: skip if version already exists in GitHub Packages
+      - name: Skip if version already exists
+        id: checkver
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          NAME=$(node -p "require('./package.json').name")
+          VER=$(node -p "require('./package.json').version")
+          if npm view "$NAME@$VER" --registry https://npm.pkg.github.com >/dev/null 2>&1; then
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+          else
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish
+        if: steps.checkver.outputs.should_publish == 'true'
+        working-directory: ${{ steps.pkg.outputs.dir }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm publish --no-git-checks
