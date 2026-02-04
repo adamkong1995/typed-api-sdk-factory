@@ -1,5 +1,5 @@
 {
-  "name": "api-b-fastify",
+  "name": "@demo/api-b-fastify",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
