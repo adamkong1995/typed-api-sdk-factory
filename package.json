@@ -1,13 +1,16 @@
 {
-  "name": "typed-api-sdk",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "name": "typed-api-sdk-factory",
+  "private": true,
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.25.0"
+  "packageManager": "pnpm@10.25.0",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "check": "pnpm -r check",
+    "generate:openapi": "pnpm -r generate:openapi",
+    "generate:sdk": "pnpm -r generate:sdk",
+    "ci:verify-generated": "pnpm generate:openapi && pnpm generate:sdk && git diff --exit-code",
+    "clean": "pnpm -r clean || true"
+  }
 }
