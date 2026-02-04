@@ -1,26 +1,35 @@
-import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
+import type { AxiosInstance } from "axios";
+import axios from "axios";
 
-// Re-export generated types/functions
-export * from "./gen";
+export * from "./gen"; // re-export generated functions + types
+export type { Options } from "./gen";
 
-// Small DX wrapper so consumers don’t interact with raw config everywhere
 export type ApiAClientOptions = {
   baseURL: string;
-  axios?: AxiosInstance;
-  defaultConfig?: AxiosRequestConfig;
+  axiosInstance?: AxiosInstance;
+  // Optional: inject headers (e.g., auth) later
+  getHeaders?: () => Promise<Record<string, string>> | Record<string, string>;
 };
 
-export function createApiAClient(options: ApiAClientOptions) {
+/**
+ * Creates a default Options object that you pass into generated SDK functions.
+ * Generated functions like `getHealth(options)` and `getCustomersByCustomerId(data, options)`
+ * will use this axios instance + baseURL.
+ */
+export function createApiAClient(opts: ApiAClientOptions) {
   const instance =
-    options.axios ??
+    opts.axiosInstance ??
     axios.create({
-      baseURL: options.baseURL,
+      baseURL: opts.baseURL,
     });
 
-  // hey-api axios client typically uses a shared client under the hood.
-  // We provide a consistent instance to use across calls.
-  return {
-    axios: instance,
-    requestConfig: options.defaultConfig,
+  const options = async () => {
+    const headers = (await opts.getHeaders?.()) ?? {};
+    return {
+      axios: instance,
+      headers,
+    };
   };
+
+  return { axios: instance, options };
 }
