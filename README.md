@@ -123,22 +123,14 @@ pnpm dev                # Run both APIs + demo consumer
 pnpm check              # Lint / typecheck / CI checks
 ```
 
-## CI / Release flow
+## Releases
 
-OpenAPI and SDKs are generated deterministically
+SDK packages are published to GitHub Packages using a tag-driven workflow.
 
-CI fails if generated files are out of date
+- `sdk-a-vX.Y.Z` → publishes `@adamkong1995/sdk-a@X.Y.Z`
+- `sdk-b-vX.Y.Z` → publishes `@adamkong1995/sdk-b@X.Y.Z`
 
-Publishing is triggered via Git tags
-
-```
-git tag v0.1.0
-git push --tags
-```
-
-This simulates a real internal SDK publishing workflow.
-
----
+This mirrors common internal SDK release practices where versioning is explicit and CI-controlled.
 
 ## Design principles
 

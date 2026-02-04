@@ -13,13 +13,6 @@
     "ci:verify-generated": "pnpm generate:openapi && pnpm generate:sdk && git diff --exit-code",
     "clean": "pnpm -r clean || true",
     "demo": "pnpm generate:openapi && pnpm generate:sdk && pnpm -r --parallel dev",
-    "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "changeset publish",
-    "version": "changeset version",
     "build": "pnpm -r --filter \"@adamkong1995/sdk-*\" build"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.29.8"
   }
 }
