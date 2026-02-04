@@ -1,4 +1,5 @@
 import { z } from "../lib/zod";
+import { z as baseZ } from "zod";
 
 export const Currency = z.literal("CAD");
 
@@ -18,6 +19,8 @@ export const ChequingAccount = z.object({
   available: Money,
 });
 
+export type ChequingAccount = baseZ.infer<typeof ChequingAccount>;
+
 export const ListAccountsResponse = z.object({
   accounts: z.array(ChequingAccount),
 });
@@ -32,6 +35,8 @@ export const Transaction = z.object({
   description: z.string().min(1),
   amount: Money,
 });
+
+export type Transaction = baseZ.infer<typeof Transaction>;
 
 export const ListTransactionsQuery = z.object({
   limit: z.coerce.number().int().min(1).max(50).default(10),
