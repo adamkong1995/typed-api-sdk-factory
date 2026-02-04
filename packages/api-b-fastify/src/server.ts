@@ -10,12 +10,27 @@ import {
   ChequingAccount,
   Transaction,
 } from "../schemas/chequing";
+import swagger from "@fastify/swagger";
+import swaggerUi from "@fastify/swagger-ui";
 
 const app = Fastify({ logger: true });
 
-// --- Docs endpoints (spec only; Swagger UI later) ---
-app.get("/openapi.json", async (_req, reply) => {
-  return reply.send(buildOpenApiDoc());
+// ---- Swagger / OpenAPI ----
+const openapi = buildOpenApiDoc();
+
+await app.register(swagger, {
+  mode: "static",
+  specification: {
+    document: openapi,
+  },
+});
+
+await app.register(swaggerUi, {
+  routePrefix: "/docs",
+  uiConfig: {
+    docExpansion: "list",
+    deepLinking: true,
+  },
 });
 
 // --- API endpoints ---
