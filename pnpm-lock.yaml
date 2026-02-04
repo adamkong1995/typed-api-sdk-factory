@@ -48,6 +48,9 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
+      '@asteasolutions/zod-to-openapi':
+        specifier: ^8.4.0
+        version: 8.4.0(zod@4.3.6)
       '@types/node':
         specifier: ^25.2.0
         version: 25.2.0
@@ -57,9 +60,6 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
-      zod-to-openapi:
-        specifier: ^0.2.1
-        version: 0.2.1(zod@4.3.6)
 
 packages:
 
@@ -344,15 +344,9 @@ packages:
   light-my-request@6.6.0:
     resolution: {integrity: sha512-CHYbu8RtboSIoVsHZ6Ye4cj4Aw/yg2oAFimlF7mNvfDV192LR7nDiKtSIfCuLT7KokPSTn/9kfVLm5OGN0A28A==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
-
   on-exit-leak-free@2.1.2:
     resolution: {integrity: sha512-0eJJY6hXLGf1udHwfNftBqH+g73EU4B504nZeKpz1sYRKafAghwxEJunB2O7rDZkL4PGfsMVnTXZ2EjibbqcsA==}
     engines: {node: '>=14.0.0'}
-
-  openapi3-ts@2.0.2:
-    resolution: {integrity: sha512-TxhYBMoqx9frXyOgnRHufjQfPXomTIHYKhSKJ6jHfj13kS8OEIhvmE8CTuQyKtjjWttAjX5DPxM1vmalEpo8Qw==}
 
   openapi3-ts@4.5.0:
     resolution: {integrity: sha512-jaL+HgTq2Gj5jRcfdutgRGLosCy/hT8sQf6VOy+P+g36cZOjI1iukdPnijC+4CmeRzg/jEllJUboEic2FhxhtQ==}
@@ -439,11 +433,6 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  typescript@4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
-
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
@@ -452,20 +441,10 @@ packages:
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
-  yaml@1.10.2:
-    resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
-    engines: {node: '>= 6'}
-
   yaml@2.8.2:
     resolution: {integrity: sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A==}
     engines: {node: '>= 14.6'}
     hasBin: true
-
-  zod-to-openapi@0.2.1:
-    resolution: {integrity: sha512-F+3aAYcWcboNYXCmu4qqiZA1Cwwgxp06VF4DOeGE7l4cWdyxSABNBH8QSRGbC4ajSKU1h/prF+yQh7bQkYGVpw==}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-    peerDependencies:
-      zod: ~3.5.1
 
   zod@4.3.6:
     resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
@@ -715,13 +694,7 @@ snapshots:
       process-warning: 4.0.1
       set-cookie-parser: 2.7.2
 
-  lodash@4.17.23: {}
-
   on-exit-leak-free@2.1.2: {}
-
-  openapi3-ts@2.0.2:
-    dependencies:
-      yaml: 1.10.2
 
   openapi3-ts@4.5.0:
     dependencies:
@@ -800,21 +773,10 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  typescript@4.9.5: {}
-
   typescript@5.9.3: {}
 
   undici-types@7.16.0: {}
 
-  yaml@1.10.2: {}
-
   yaml@2.8.2: {}
-
-  zod-to-openapi@0.2.1(zod@4.3.6):
-    dependencies:
-      lodash: 4.17.23
-      openapi3-ts: 2.0.2
-      typescript: 4.9.5
-      zod: 4.3.6
 
   zod@4.3.6: {}
