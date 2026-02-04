@@ -11,6 +11,7 @@
     "generate:openapi": "pnpm -r generate:openapi",
     "generate:sdk": "pnpm -r generate:sdk",
     "ci:verify-generated": "pnpm generate:openapi && pnpm generate:sdk && git diff --exit-code",
-    "clean": "pnpm -r clean || true"
+    "clean": "pnpm -r clean || true",
+    "demo": "pnpm generate:openapi && pnpm generate:sdk && pnpm -r --parallel dev"
   }
 }

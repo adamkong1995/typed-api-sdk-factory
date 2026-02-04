@@ -12,6 +12,8 @@ import {
   getChequingAccountsByAccountIdTransactions,
 } from "@demo/sdk-b";
 
+import { waitForHealth } from "./utils.js";
+
 const apiABaseURL = process.env.API_A_BASE_URL ?? "http://localhost:4011";
 const apiBBaseURL = process.env.API_B_BASE_URL ?? "http://localhost:4012";
 
@@ -92,6 +94,12 @@ async function main() {
     );
   }
 }
+
+// Wait for both APIs to be healthy (for demo purposes)
+console.log("[demo-consumer] Waiting for APIs to be healthy...");
+await Promise.all([waitForHealth(apiABaseURL), waitForHealth(apiBBaseURL)]);
+
+console.log("[demo-consumer] APIs are up, starting calls...");
 
 main().catch((err) => {
   console.error(err);
