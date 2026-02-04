@@ -72,6 +72,9 @@ importers:
       '@demo/sdk-a':
         specifier: workspace:*
         version: link:../sdk-a
+      '@demo/sdk-b':
+        specifier: workspace:*
+        version: link:../sdk-b
     devDependencies:
       '@types/node':
         specifier: ^25.2.0
